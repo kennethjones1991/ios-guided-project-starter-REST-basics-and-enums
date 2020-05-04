@@ -9,9 +9,14 @@
 import UIKit
 
 class PersonSearchTableViewController: UITableViewController {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    let leia = Person(name: "Leia Organa", birthYear: "19BBY", height: "150")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
     }
 
     // MARK: - Table view data source
@@ -28,9 +33,15 @@ class PersonSearchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.reuseIdentifier, for: indexPath) as! PersonTableViewCell
 
         // Configure the cell...
-        cell.nameLabel.text = "Leia Organa"
-        cell.genderLabel.text = "Gender: female"
-        cell.birthYearLabel.text = "Birth Year: 19BBY"
+        cell.nameLabel.text = leia.name
+        cell.heightLabel.text = "\(leia.height) cm"
+        cell.birthYearLabel.text = "Born \(leia.birthYear)"
         return cell
+    }
+}
+
+extension PersonSearchTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
     }
 }
